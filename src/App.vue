@@ -5,14 +5,23 @@
     </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
-    <label for="item_input">New list item<input v-model="newListItem" 
-      required 
-      type="text" 
-      name="" 
-      id="item_input" 
-      placeholder="Ведро воды"
+    <label for="item_input">New list item
+      <input v-model="newListItem" 
+        required 
+        type="text" 
+        name="" 
+        id="item_input" 
+        placeholder="Ведро воды"
       ></label>
-    <button v-on:click="addItem">Add</button>
+      <select 
+      name="colorSelect" 
+      id="colorSelectId"
+      placeholder="">
+      <option value="">Choose color</option>
+      <option value="yellow">Not done</option>
+      <option value="green">Done</option>
+    </select>
+    <button @click="addItem">Add</button>
   </form>
 </template>
 
@@ -26,7 +35,8 @@ export default {
       { item: '25 картошек' },
       { item: '17 мандавошек' },
     ],
-    newListItem: ''
+    newListItem: '',        /*Variable for putting value to list's array*/
+    itemColor: ''           /*Variable for putting color to list's item*/
     }
   },
   methods: {
@@ -34,7 +44,10 @@ export default {
       if(this.newListItem) {
         this.todoList.push({item: this.newListItem});
       }
-      this.newListItem = ''
+      this.newListItem = '';
+    },
+    colorChoice() {
+
     }
   }
 }
@@ -90,5 +103,10 @@ ol {
 
 button {
   font-size: 1em;
+  display: block;
+}
+select {
+  font-size: 1em;
+
 }
 </style>
