@@ -1,7 +1,7 @@
 <template>
   <div class="todo_list">
     <ol>
-      <li :class="{listColorYellow: notDone, listColorGreen: done }" v-for="itemCount in todoList">{{ itemCount.item }}</li>
+      <li :class="{ listColorYellow: completed, listColorGreen: completed}" v-for="itemCount in todoList">{{ itemCount.item }}</li>
     </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
@@ -14,13 +14,13 @@
         placeholder="Ведро воды"
       ></label>
       <select
-      v-model="itemColor" 
+      v-model="completed" 
       name="colorSelect" 
       id="colorSelectId"
       placeholder=""
       required>
-      <option value="yellow">Not done</option>
-      <option value="green">Done</option>
+      <option value="false">Not done</option>
+      <option value="true">Done</option>
     </select>
     <button @click="addItem">Add</button>
   </form>
@@ -31,30 +31,34 @@
 export default {
   data() {
     return { todoList: [
-      { item: 'Укроп', color: 'yellow' },
-      { item: 'Кошачий жоп', color: 'yellow' },
-      { item: '25 картошек', color: 'yellow' },
-      { item: '17 мандавошек', color: 'yellow' },
+      { item: 'Укроп', completed: false },
+      { item: 'Кошачий жоп', completed: false },
+      { item: '25 картошек', completed: false },
+      { item: '17 мандавошек', completed: false },
     ],
     newListItem: '',        /*Variable for putting value to list's array*/
-    itemColor: '' ,          /*Variable for putting color to list's item*/
-    notDone: true,
-    done: false
+    completed: '' ,          /*Variable for putting color to list's item*/
     }
   },
   methods: {
     addItem() {
-      if(this.newListItem && this.itemColor) {
-        this.todoList.push({item: this.newListItem, color: this.itemColor});
-      } else {
-        console.log(this.itemColor)
+      if(this.newListItem && this.completed == 'false') {
+        this.todoList.push({item: this.newListItem, completed: false});
+        console.log('not done')
+      } else if (this.newListItem && this.completed == 'true') {
+
+      }
+       else {
+        console.log(this.completed)
         this.newListItem = '';
         this.itemColor = '';
         alert('Enter both');
       }
     },
     colorChoice() {
-      if (this.itemColor = "yellow")
+      if (this.itemColor = "yellow") {
+
+      }
     }
   }
 }
