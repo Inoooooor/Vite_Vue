@@ -1,7 +1,7 @@
 <template>
   <div class="todo_list">
     <ol>
-      <li @click="changeColor()" :class="{ listColorGreen: itemCount.completed }" v-for="itemCount in todoList">{{ itemCount.item }} {{ itemCount.completed }}</li>
+      <li @click="colorChange(itemCount)" :class="{ listColorGreen: itemCount.completed }" v-for="itemCount in todoList">{{ itemCount.item }} {{ itemCount.completed }}</li>
     </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
@@ -57,9 +57,8 @@ export default {
         alert('Enter both');
       }
     },
-    changeColor(itemIndex) {
-      this.todoList[0].completed = (this.todoList[0].completed ? false : true);
-      console.log(itemIndex)
+    colorChange(object) {
+      object.completed = !object.completed;
     }
   }
 }
