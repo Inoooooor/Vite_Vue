@@ -1,7 +1,7 @@
 <template>
   <div class="todo_list">
     <ol>
-      <li :class="{ listColorYellow: completed, listColorGreen: completed}" v-for="itemCount in todoList">{{ itemCount.item }}</li>
+      <li @click="changeColor()" :class="{ listColorGreen: itemCount.completed }" v-for="itemCount in todoList">{{ itemCount.item }} {{ itemCount.completed }}</li>
     </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
@@ -31,8 +31,8 @@
 export default {
   data() {
     return { todoList: [
-      { item: 'Укроп', completed: false },
-      { item: 'Кошачий жоп', completed: false },
+      { item: 'Укроп', completed: true },
+      { item: 'Кошачий жоп', completed: true },
       { item: '25 картошек', completed: false },
       { item: '17 мандавошек', completed: false },
     ],
@@ -44,27 +44,27 @@ export default {
     addItem() {
       if(this.newListItem && this.completed == 'false') {
         this.todoList.push({item: this.newListItem, completed: false});
-        console.log('not done')
+        this.newListItem = '';
+        this.completed = '';
       } else if (this.newListItem && this.completed == 'true') {
-
+        this.todoList.push({item: this.newListItem, completed: true});
+        this.newListItem = '';
+        this.completed = '';
       }
        else {
-        console.log(this.completed)
         this.newListItem = '';
-        this.itemColor = '';
+        this.completed = '';
         alert('Enter both');
       }
     },
-    colorChoice() {
-      if (this.itemColor = "yellow") {
-
-      }
+    changeColor(itemIndex) {
+      this.todoList[0].completed = (this.todoList[0].completed ? false : true);
+      console.log(itemIndex)
     }
   }
 }
 
 </script>
-
 
 <style>
 * {
@@ -112,8 +112,9 @@ ol {
   padding: 5%;
 }
 
-.listColorYellow {
+li {
   background-color: yellow;
+  cursor: pointer;
 }
 
 .listColorGreen {
