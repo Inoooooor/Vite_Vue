@@ -1,7 +1,7 @@
 <template>
   <div class="todo_list">
     <ol>
-      <li v-for="itemCount in todoList">{{ itemCount.item }}</li>
+      <li :class="{listColorYellow: notDone, listColorGreen: done }" v-for="itemCount in todoList">{{ itemCount.item }}</li>
     </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
@@ -13,11 +13,12 @@
         id="item_input" 
         placeholder="Ведро воды"
       ></label>
-      <select 
+      <select
+      v-model="itemColor" 
       name="colorSelect" 
       id="colorSelectId"
-      placeholder="">
-      <option value="">Choose color</option>
+      placeholder=""
+      required>
       <option value="yellow">Not done</option>
       <option value="green">Done</option>
     </select>
@@ -30,24 +31,30 @@
 export default {
   data() {
     return { todoList: [
-      { item: 'Укроп' },
-      { item: 'Кошачий жоп' },
-      { item: '25 картошек' },
-      { item: '17 мандавошек' },
+      { item: 'Укроп', color: 'yellow' },
+      { item: 'Кошачий жоп', color: 'yellow' },
+      { item: '25 картошек', color: 'yellow' },
+      { item: '17 мандавошек', color: 'yellow' },
     ],
     newListItem: '',        /*Variable for putting value to list's array*/
-    itemColor: ''           /*Variable for putting color to list's item*/
+    itemColor: '' ,          /*Variable for putting color to list's item*/
+    notDone: true,
+    done: false
     }
   },
   methods: {
     addItem() {
-      if(this.newListItem) {
-        this.todoList.push({item: this.newListItem});
+      if(this.newListItem && this.itemColor) {
+        this.todoList.push({item: this.newListItem, color: this.itemColor});
+      } else {
+        console.log(this.itemColor)
+        this.newListItem = '';
+        this.itemColor = '';
+        alert('Enter both');
       }
-      this.newListItem = '';
     },
     colorChoice() {
-
+      if (this.itemColor = "yellow")
     }
   }
 }
@@ -99,6 +106,14 @@ input {
 
 ol {
   padding: 5%;
+}
+
+.listColorYellow {
+  background-color: yellow;
+}
+
+.listColorGreen {
+  background-color: green;
 }
 
 button {
