@@ -4,13 +4,14 @@
       <li v-for="itemCount in todoList">{{ itemCount.item }}</li>
     </ol>
   </div>
-  <form action="" class="input_div">
+  <form action="" class="input_div" @click.prevent>
     <label for="item_input">New list item<input v-model="newListItem" 
       required 
       type="text" 
       name="" 
       id="item_input" 
-      @keyup.enter="addItem"></label>
+      placeholder="Ведро воды"
+      ></label>
     <button v-on:click="addItem">Add</button>
   </form>
 </template>
@@ -25,13 +26,15 @@ export default {
       { item: '25 картошек' },
       { item: '17 мандавошек' },
     ],
-    newListItem: 'test'
+    newListItem: ''
     }
   },
   methods: {
     addItem() {
-      this.todoList.push({item: this.newListItem});
-
+      if(this.newListItem) {
+        this.todoList.push({item: this.newListItem});
+      }
+      this.newListItem = ''
     }
   }
 }
