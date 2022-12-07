@@ -1,45 +1,78 @@
 <script>
-import { createApp } from 'vue'
 
 export default {
   data() {
-    return {
-      message: 'САлам Вью '
+    return { todoList: [
+      { item: 'Укроп' },
+      { item: 'Кошачий жоп' },
+      { item: '25 картошек' },
+      { item: '17 мандавошек' },
+    ]
     }
   },
-  methods: {
-    reverseMessage() {
-      this.message = this.message
-        .split('')
-        .reverse()
-        .join('')
-    }
-  }
 }
 
 </script>
 
 <template>
-  <div id="reverse">
-    <p>{{ message }}</p>
-    <button v-on:click="reverseMessage">press me to reverse</button>
+  <div class="todo_list">
+    <ol>
+      <li v-for="itemCount in todoList">{{ itemCount.item }}</li>
+    </ol>
+  </div>
+  <div class="input_div">
+    <label for="item_input">New list item<input type="text" name="" id="item_input"></label>
+    <button>Add</button>
   </div>
 </template>
 
-<style scoped>
+<style>
 * {
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
-.greeting {
-  color: rebeccapurple;
-  font-weight: bold;
+
+body {
+  font-size: 2rem;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template: repeat(12, 1fr) / 1fr 600px 1fr;
 }
 
-#reverse {
-  height: 100vh;
-  width: 100wh;
-  background-color: aqua;
+#app {
+  grid-area: 2 / 2 / -2 / 3;
+  background-color: rgb(121, 38, 0);
+  display: grid;
+  grid-template: 5% repeat(10, 1fr) 5% / 1fr 90% 1fr;
+}
+
+.todo_list {
+  grid-area: 2 / 2 / 10 / -2;
+  background-color: rgb(255, 153, 0);
+  border-radius: 3%;
+}
+
+.input_div {
+  grid-area: 10 / 2 / 12 / -2;
+}
+
+label {
+  color: white;
+  display: block;
+}
+
+input {
+  display: block;
+  font-size: 1em;
+}
+
+ol {
+  padding: 5%;
+}
+
+button {
+  font-size: 1em;
 }
 </style>
