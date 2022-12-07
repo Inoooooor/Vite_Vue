@@ -1,7 +1,7 @@
 <template>
   <div class="todo_list">
     <ol>
-      <li @click="colorChange(itemCount)" :class="{ listColorGreen: itemCount.completed }" v-for="itemCount in todoList">{{ itemCount.item }} {{ itemCount.completed }}</li>
+      <li @click="colorChange(itemCount)" :class="{ listColorGreen: itemCount.completed }" v-for="itemCount in todoList">{{ itemCount.item }}</li>
     </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
@@ -94,7 +94,7 @@ body {
 }
 
 .input_div {
-  grid-area: 10 / 2 / 12 / -2;
+  grid-area: 10 / 2 / 13 / -2;
 }
 
 label {
