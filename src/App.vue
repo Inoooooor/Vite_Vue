@@ -45,7 +45,6 @@ export default {
       if(this.newListItem) {
         this.todoList.push({item: this.newListItem, completed: this.completed});
         localStorage.setItem(`list item ${this.todoList.length - 1}`, JSON.stringify({item: this.newListItem, completed: this.completed}));
-        // console.log(JSON.parse(localStorage.getItem('5')));
         this.inputClear();
       }
     },
@@ -57,12 +56,7 @@ export default {
     }
   },
   mounted() {
-    // for (let key in this.todoList) {
-    // console.log(this.todoList[key]);
-    // }
-    // console.log(JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)));
     for ( let i = 0, len = localStorage.length; i < len; ++i ) {
-      // console.log( localStorage.getItem( localStorage.key( i ) ) );
       this.todoList.push({
         item: JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)).item,
         completed: JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)).completed
