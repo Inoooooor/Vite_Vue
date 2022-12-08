@@ -44,6 +44,8 @@ export default {
     addItem() {
       if(this.newListItem) {
         this.todoList.push({item: this.newListItem, completed: this.completed});
+        localStorage.setItem(`listItem ${this.todoList.length - 1}`, JSON.stringify({item: this.newListItem, completed: this.completed}));
+        // console.log(JSON.parse(localStorage.getItem('5')));
         this.inputClear();
       }
     },
@@ -52,7 +54,12 @@ export default {
     },
     inputClear() {
       this.newListItem = '';
-      this.completed = '';
+    }
+  },
+  mounted() {
+    for ( let i = 0, len = localStorage.length; i < len; ++i ) {
+      console.log(JSON.parse(localStorage.getItem(`listItem ${this.todoList.length + i}`)));
+      // this.todoList.push(JSON.parse(localStorage.getItem(`listItem ${this.todoList.length + i}`)));
     }
   }
 }
