@@ -37,28 +37,22 @@ export default {
       { item: '17 мандавошек', completed: false },
     ],
     newListItem: '',        /*Variable for putting value to list's array*/
-    completed: '' ,          /*Variable for putting color to list's item*/
+    completed: false ,          /*Variable for putting color to list's item*/
     }
   },
   methods: {
     addItem() {
-      if(this.newListItem && this.completed == 'false') {
-        this.todoList.push({item: this.newListItem, completed: false});
-        this.newListItem = '';
-        this.completed = '';
-      } else if (this.newListItem && this.completed == 'true') {
-        this.todoList.push({item: this.newListItem, completed: true});
-        this.newListItem = '';
-        this.completed = '';
-      }
-       else {
-        this.newListItem = '';
-        this.completed = '';
-        alert('Enter both');
+      if(this.newListItem) {
+        this.todoList.push({item: this.newListItem, completed: this.completed});
+        this.inputClear();
       }
     },
     colorChange(object) {
       object.completed = !object.completed;
+    },
+    inputClear() {
+      this.newListItem = '';
+      this.completed = '';
     }
   }
 }
