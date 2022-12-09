@@ -30,12 +30,7 @@
 
 export default {
   data() {
-    return { todoList: [
-      { item: 'Укроп', completed: true },
-      { item: 'Кошачий жоп', completed: true },
-      { item: '25 картошек', completed: false },
-      { item: '17 мандавошек', completed: false },
-    ],
+    return { todoList: [],
     newListItem: '',        /*Variable for putting value to list's array*/
     completed: false ,          /*Variable for putting color to list's item*/
     }
@@ -56,14 +51,12 @@ export default {
     }
   },
   mounted() {
-    localStorage.setItem('todoList', JSON.stringify(this.todoList));
+    // localStorage.setItem('todoList', JSON.stringify(this.todoList));
     if (localStorage.getItem('todoList')) {
       console.log(JSON.parse(localStorage.getItem('todoList')));
       const listContent = JSON.parse(localStorage.getItem('todoList'));
       this.todoList = listContent;
-    } else {
-      this.todoList = []
-    }
+    } 
 
     // for ( let i = 0, len = localStorage.length; i < len; ++i ) {
     //   this.todoList.push({
