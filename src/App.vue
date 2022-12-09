@@ -30,6 +30,11 @@
     <button @click="clearAll">Clear all</button>
     <button @click="clearCompleted">Clear completed</button>  
   </form>
+  <div class="list_templates">
+    <button @click="plovRecipe" class="plov_template">Plov recipe</button>
+    <button @click="antonQuote" class="anton">Anton's quote</button>
+    <button @click="dailyList" class="regular_template">Daily list</button>
+  </div>
 </template>
 
 <script>
@@ -68,6 +73,43 @@ export default {
     },
     clearCompleted(){
       this.todoList = this.todoList.filter(item => !item.completed);
+      this.updateList();
+    },
+    antonQuote() {
+      this.todoList = [
+        {item: 'Ты', completed: false},
+        {item: 'Бы', completed: false},
+        {item: 'И', completed: false},
+        {item: 'В', completed: false},
+        {item: 'Рот', completed: false},
+        {item: 'Взял', completed: false},
+      ];
+      this.updateList();
+    },
+    plovRecipe() {
+      this.todoList = [
+        {item: 'Укроп', completed: false},
+        {item: 'Кошачий жоп', completed: false},
+        {item: '25 картошек', completed: false},
+        {item: '17 мондовошек', completed: false},
+        {item: 'Ведро воды', completed: false},
+        {item: 'Хуй туды', completed: false},
+        {item: 'Охапку дров', completed: false},
+        {item: 'Плов готов', completed: false},
+      ]
+      this.updateList();
+    },
+    dailyList() {
+      this.todoList = [
+        {item: 'Eggs', completed: false},
+        {item: 'Milk', completed: false},
+        {item: 'Water', completed: false},
+        {item: 'Bread', completed: false},
+        {item: 'Butter', completed: false},
+        {item: 'Whiskey', completed: false},
+        {item: 'Cundoms', completed: false},
+        {item: 'Lottery ticket', completed: false},
+      ]
       this.updateList();
     }
   },
@@ -123,6 +165,7 @@ label {
 input {
   /* display: block; */
   font-size: 1em;
+  flex-grow: 1;
   width: 100%;
 }
 
@@ -142,11 +185,14 @@ li {
 }
 
 button {
-  font-size: 1em;
+  font-size: 0.7em;
+  font-weight: bold;
+  flex-grow: 1;
   /* display: block; */
 }
 select {
-  font-size: 1em;
+  /* font-size: 1em; */
+  flex-grow: 1;
 }
 
 .deleteButton {
@@ -155,5 +201,14 @@ select {
   cursor: pointer;
   background-color: rgb(255, 50, 50);
   color: white;
+  flex-grow: 0;
+}
+
+.list_templates {
+  grid-area: 1 / 1 / 2 / 4;
+}
+
+.list_templates button {
+  width: calc(100% / 3);
 }
 </style>
