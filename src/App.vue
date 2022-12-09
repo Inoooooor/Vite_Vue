@@ -28,6 +28,7 @@
       <option value="true">Done</option>
     </select>
     <button @click="addItem">Add</button>
+    <button @click="clearAll()">Clear all</button>
   </form>
 </template>
 
@@ -44,7 +45,7 @@ export default {
     addItem() {
       if(this.newListItem) {
         this.todoList.push({item: this.newListItem, completed: this.completed});
-        localStorage.setItem('todoList', JSON.stringify(this.todoList));
+        this.updateList();
         this.inputClear();
       }
     },
@@ -56,12 +57,15 @@ export default {
     },
     removeItem(index) {
       this.todoList.splice(index, 1);
-      this.updateList(this.todoList);
+      this.updateList();
     },
-    updateList(list) {
-      const updatedList = JSON.stringify(list);
-      localStorage.setItem('todoList', updatedList);
+    updateList() {
+      localStorage.setItem('todoList', JSON.stringify(this.todoList));
     },
+    clearAll() {
+      this.todoList = [];
+      this.updateList();
+    }
   },
   mounted() {
     // localStorage.setItem('todoList', JSON.stringify(this.todoList));
@@ -105,6 +109,8 @@ body {
 
 .input_div {
   grid-area: 10 / 2 / 13 / -2;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
@@ -113,8 +119,9 @@ label {
 }
 
 input {
-  display: block;
+  /* display: block; */
   font-size: 1em;
+  width: 100%;
 }
 
 ol {
@@ -134,7 +141,7 @@ li {
 
 button {
   font-size: 1em;
-  display: block;
+  /* display: block; */
 }
 select {
   font-size: 1em;
