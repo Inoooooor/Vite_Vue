@@ -3,11 +3,10 @@
       <ol>
         <transition-group name="fade">
           <li @click="colorChange(itemCount)" 
-              v-if="show"
               :key="Math.random"
               :class="{ listColorGreen: itemCount.completed }" 
               v-for="(itemCount, index) in todoList">{{ itemCount.item }} 
-              <button class="deleteButton" @click='removeItem(index)'>X</button>
+              <button class="deleteButton" @click.stop='removeItem(index)'>X</button>
           </li>
         </transition-group>
       </ol>
@@ -47,7 +46,6 @@ export default {
     return { todoList: [],
     newListItem: '',        /*Variable for putting value to list's array*/
     completed: false ,          /*Variable for putting color to list's item*/
-    show: true,
     }
   },
   methods: {
@@ -192,15 +190,13 @@ button {
   font-size: 0.7em;
   font-weight: bold;
   flex-grow: 1;
-  /* display: block; */
 }
+
 select {
-  /* font-size: 1em; */
   flex-grow: 1;
 }
 
 .deleteButton {
-  /* padding-right: 2%; */
   width: 7%;
   cursor: pointer;
   background-color: rgb(255, 50, 50);
@@ -217,10 +213,11 @@ select {
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s ease;
+  transition: opacity .5s ease, background-color .5s;
 }
 
 .fade-enter-from, .fade-leave-active{
   opacity: 0;
-  }
+}
+
 </style>
