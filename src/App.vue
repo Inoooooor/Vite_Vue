@@ -1,7 +1,12 @@
 <template>
   <div class="todo_list">
     <ol>
-      <li @click="colorChange(itemCount)" :class="{ listColorGreen: itemCount.completed }" v-for="itemCount in todoList">{{ itemCount.item }}</li>
+      <li @click="colorChange(itemCount)" 
+          :class="{ listColorGreen: itemCount.completed }" 
+          v-for="itemCount in todoList">{{ itemCount.item }} 
+          <button class="deleteButton" 
+          @click='removeItem(itemCount)'>X</button>
+      </li>
     </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
@@ -48,7 +53,10 @@ export default {
     },
     inputClear() {
       this.newListItem = '';
-    }
+    },
+    removeItem(index) {
+      this.todoList.splice(index, 1);
+    },
   },
   mounted() {
     // localStorage.setItem('todoList', JSON.stringify(this.todoList));
@@ -57,13 +65,6 @@ export default {
       const listContent = JSON.parse(localStorage.getItem('todoList'));
       this.todoList = listContent;
     } 
-
-    // for ( let i = 0, len = localStorage.length; i < len; ++i ) {
-    //   this.todoList.push({
-    //     item: JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)).item,
-    //     completed: JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)).completed
-    //   });
-    // }
   }
 }
 
@@ -118,6 +119,8 @@ ol {
 li {
   background-color: yellow;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 }
 
 .listColorGreen {
@@ -130,6 +133,13 @@ button {
 }
 select {
   font-size: 1em;
+}
 
+.deleteButton {
+  /* padding-right: 2%; */
+  width: 7%;
+  cursor: pointer;
+  background-color: rgb(255, 50, 50);
+  color: white;
 }
 </style>
