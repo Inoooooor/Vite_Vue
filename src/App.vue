@@ -44,7 +44,7 @@ export default {
     addItem() {
       if(this.newListItem) {
         this.todoList.push({item: this.newListItem, completed: this.completed});
-        localStorage.setItem(`list item ${this.todoList.length - 1}`, JSON.stringify({item: this.newListItem, completed: this.completed}));
+        localStorage.setItem('todoList', JSON.stringify(this.todoList));
         this.inputClear();
       }
     },
@@ -56,12 +56,21 @@ export default {
     }
   },
   mounted() {
-    for ( let i = 0, len = localStorage.length; i < len; ++i ) {
-      this.todoList.push({
-        item: JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)).item,
-        completed: JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)).completed
-      });
+    localStorage.setItem('todoList', JSON.stringify(this.todoList));
+    if (localStorage.getItem('todoList')) {
+      console.log(JSON.parse(localStorage.getItem('todoList')));
+      const listContent = JSON.parse(localStorage.getItem('todoList'));
+      this.todoList = listContent;
+    } else {
+      this.todoList = []
     }
+
+    // for ( let i = 0, len = localStorage.length; i < len; ++i ) {
+    //   this.todoList.push({
+    //     item: JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)).item,
+    //     completed: JSON.parse(localStorage.getItem(`list item ${this.todoList.length}`)).completed
+    //   });
+    // }
   }
 }
 
