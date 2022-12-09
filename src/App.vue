@@ -66,17 +66,10 @@ export default {
       this.todoList = [];
       this.updateList();
     },
-    parseCompleted(itemCount) {
-      return itemCount.completed;
-    },
-    parseIncompleted(itemCount) {
-      return ! this.parseCompleted(itemCount);
-    },
-    clearCompleted() {
-      this.todoList = this.todoList.filter(this.parseIncompleted);
+    clearCompleted(){
+      this.todoList = this.todoList.filter(item => !item.completed);
       this.updateList();
     }
-
   },
   mounted() {
     if (localStorage.getItem('todoList')) {
