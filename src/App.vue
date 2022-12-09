@@ -1,12 +1,16 @@
 <template>
   <div class="todo_list">
-    <ol>
-      <li @click="colorChange(itemCount)" 
-          :class="{ listColorGreen: itemCount.completed }" 
-          v-for="(itemCount, index) in todoList">{{ itemCount.item }} 
-          <button class="deleteButton" @click='removeItem(index)'>X</button>
-      </li>
-    </ol>
+      <ol>
+        <transition-group name="fade">
+          <li @click="colorChange(itemCount)" 
+              v-if="show"
+              :key="Math.random"
+              :class="{ listColorGreen: itemCount.completed }" 
+              v-for="(itemCount, index) in todoList">{{ itemCount.item }} 
+              <button class="deleteButton" @click='removeItem(index)'>X</button>
+          </li>
+        </transition-group>
+      </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
     <label for="item_input">New list item
@@ -36,7 +40,6 @@
     <button @click="dailyList" class="regular_template">Daily list</button>
   </div>
 </template>
-
 <script>
 
 export default {
@@ -44,6 +47,7 @@ export default {
     return { todoList: [],
     newListItem: '',        /*Variable for putting value to list's array*/
     completed: false ,          /*Variable for putting color to list's item*/
+    show: true,
     }
   },
   methods: {
@@ -211,4 +215,12 @@ select {
 .list_templates button {
   width: calc(100% / 3);
 }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease;
+}
+
+.fade-enter-from, .fade-leave-active{
+  opacity: 0;
+  }
 </style>
