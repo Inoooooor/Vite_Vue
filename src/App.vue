@@ -4,8 +4,7 @@
       <li @click="colorChange(itemCount)" 
           :class="{ listColorGreen: itemCount.completed }" 
           v-for="(itemCount, index) in todoList">{{ itemCount.item }} 
-          <button class="deleteButton" 
-          @click='removeItem(index)'>X</button>
+          <button class="deleteButton" @click='removeItem(index)'>X</button>
       </li>
     </ol>
   </div>
@@ -24,11 +23,12 @@
       id="colorSelectId"
       placeholder=""
       required>
-      <option value="false">Not done</option>
+      <option value="">Not done</option>
       <option value="true">Done</option>
     </select>
     <button @click="addItem">Add</button>
-    <button @click="clearAll()">Clear all</button>
+    <button @click="clearAll">Clear all</button>
+    <button @click="clearCompleted">Clear completed</button>  
   </form>
 </template>
 
@@ -65,12 +65,21 @@ export default {
     clearAll() {
       this.todoList = [];
       this.updateList();
+    },
+    parseCompleted(itemCount) {
+      return itemCount.completed;
+    },
+    parseIncompleted(itemCount) {
+      return ! this.parseCompleted(itemCount);
+    },
+    clearCompleted() {
+      this.todoList = this.todoList.filter(this.parseIncompleted);
+      this.updateList();
     }
+
   },
   mounted() {
-    // localStorage.setItem('todoList', JSON.stringify(this.todoList));
     if (localStorage.getItem('todoList')) {
-      console.log(JSON.parse(localStorage.getItem('todoList')));
       const listContent = JSON.parse(localStorage.getItem('todoList'));
       this.todoList = listContent;
     } 
