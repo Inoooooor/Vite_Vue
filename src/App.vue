@@ -3,9 +3,9 @@
     <ol>
       <li @click="colorChange(itemCount)" 
           :class="{ listColorGreen: itemCount.completed }" 
-          v-for="itemCount in todoList">{{ itemCount.item }} 
+          v-for="(itemCount, index) in todoList">{{ itemCount.item }} 
           <button class="deleteButton" 
-          @click='removeItem(itemCount)'>X</button>
+          @click='removeItem(index)'>X</button>
       </li>
     </ol>
   </div>
