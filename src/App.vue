@@ -56,6 +56,11 @@ export default {
     },
     removeItem(index) {
       this.todoList.splice(index, 1);
+      this.updateList(this.todoList);
+    },
+    updateList(list) {
+      const updatedList = JSON.stringify(list);
+      localStorage.setItem('todoList', updatedList);
     },
   },
   mounted() {
