@@ -1,5 +1,5 @@
 <template>
-  <div class="todo_list">
+  <!-- <div class="todo_list">
     <ol>
         <transition-group name="fade">
           <li @click="colorChange(itemCount)" 
@@ -10,7 +10,8 @@
           </li>
         </transition-group>
     </ol>
-  </div>
+  </div> -->
+  <List :array="todoList"></List>
   <form action="" class="input_div" @click.prevent>
     <label for="item_input">New list item
       <input v-model="newListItem" 
@@ -40,11 +41,11 @@
   </div>
 </template>
 <script>
-// import ButtonCounter from './components/ButtonCounter.vue'
+import List from './components/List.vue'
 
 export default {
   components: {
-    // ButtonCounter
+    List,
   },
   data() {
     return { todoList: [],
