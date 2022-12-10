@@ -1,55 +1,19 @@
 <template>
-  <!-- <div class="todo_list">
-    <ol>
-        <transition-group name="fade">
-          <li @click="colorChange(itemCount)" 
-              :key="Math.random"
-              :class="{ listColorGreen: itemCount.completed }" 
-              v-for="(itemCount, index) in todoList">{{ itemCount.item }} 
-              <button class="deleteButton" @click.stop='removeItem(index)'>X</button>
-          </li>
-        </transition-group>
-    </ol>
-  </div> -->
-  <List :array="todoList"></List>
-  <!-- <form action="" class="input_div" @click.prevent>
-    <label for="item_input">New list item
-      <input v-model="newListItem" 
-        required 
-        type="text" 
-        name="" 
-        id="item_input" 
-        placeholder="Ведро воды"
-      ></label>
-      <select
-      v-model="completed" 
-      name="colorSelect" 
-      id="colorSelectId"
-      placeholder=""
-      required>
-      <option value="">Not done</option>
-      <option value="true">Done</option>
-    </select>
-    <button @click="addItem">Add</button>
-    <button @click="clearAll">Clear all</button>
-    <button @click="clearCompleted">Clear completed</button>  
-  </form> -->
+  <List 
+    :array="todoList">
+  </List>
   <InputForm
   :array="todoList"
    @clear-all="clearAll"
    @clear-completed="clearCompleted"
    ></InputForm>
-  <!-- <div class="list_templates">
-    <button @click="plovRecipe" class="plov_template">Plov recipe</button>
-    <button @click="antonQuote" class="anton">Anton's quote</button>
-    <button @click="dailyList" class="regular_template">Daily list</button>
-  </div> -->
   <ListTemplates
     @anton-quote="antonQuote"
     @plov-recipe="plovRecipe"
     @daily-list="dailyList">
   </ListTemplates>
 </template>
+
 <script>
 import List from './components/List.vue'
 import InputForm from './components/InputForm.vue'
@@ -63,28 +27,9 @@ export default {
   data() {
     return { 
     todoList: [],
-    // newListItem: '',        /*Variable for putting value to list's array*/
-    // completed: false ,      /*Variable for putting color to list's item*/
     }
   },
   methods: {
-    // addItem() {
-    //   if(this.newListItem) {
-    //     this.todoList.push({item: this.newListItem, completed: this.completed});
-    //     this.updateList();
-    //     this.inputClear();
-    //   }
-    // },
-    colorChange(object) {
-      object.completed = !object.completed;
-    },
-    removeItem(index) {
-      this.todoList.splice(index, 1);
-      this.updateList();
-    },
-    // inputClear() {
-    //   this.newListItem = '';
-    // },
     updateList() {
       localStorage.setItem('todoList', JSON.stringify(this.todoList));
     },
@@ -166,62 +111,6 @@ body {
   grid-template: 5% repeat(10, 1fr) 5% / 1fr 90% 1fr;
 }
 
-/* .todo_list {
-  grid-area: 2 / 2 / 10 / -2;
-  background-color: rgb(255, 153, 0);
-  border-radius: 3%;
-} */
-
-/* .input_div {
-  grid-area: 10 / 2 / 13 / -2;
-  display: flex;
-  flex-direction: column;
-} */
-
-/* label {
-  color: white;
-  display: block;
-} */
-
-/* input {
-  font-size: 1em;
-  flex-grow: 1;
-  width: 100%;
-} */
-
-/* ol {
-  padding: 5%;
-} */
-
-/* li {
-  background-color: yellow;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-} */
-
-/* .listColorGreen {
-  background-color: green;
-} */
-
-/* button {
-  font-size: 0.7em;
-  font-weight: bold;
-  flex-grow: 1;
-} */
-
-/* select {
-  flex-grow: 1;
-} */
-
-/* .deleteButton {
-  width: 7%;
-  cursor: pointer;
-  background-color: rgb(255, 50, 50);
-  color: white;
-  flex-grow: 0;
-} */
-
 .list_templates {
   grid-area: 1 / 1 / 2 / 4;
 }
@@ -229,13 +118,4 @@ body {
 .list_templates button {
   width: calc(100% / 3);
 }
-
-/* .fade-enter-active, .fade-leave-active {
-  transition: opacity .5s ease, background-color .5s;
-}
-
-.fade-enter-from, .fade-leave-active{
-  opacity: 0;
-} */
-
 </style>

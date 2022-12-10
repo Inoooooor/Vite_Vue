@@ -8,14 +8,6 @@
 
 <script>
 export default {
-  props: {
-    array: Array,
-  },
-  data() {
-    return {
-      count: 0
-    }
-  },
   methods: {
     antonQuote() {
       this.$emit('anton-quote');
@@ -34,5 +26,13 @@ button {
   font-size: 0.7em;
   font-weight: bold;
   flex-grow: 1;
+}
+
+.list_templates {
+  grid-area: 1 / 1 / 2 / 4;
+}
+
+.list_templates button {
+  width: calc(100% / 3);
 }
 </style>

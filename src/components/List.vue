@@ -18,11 +18,6 @@ export default {
   props: {
     array: Array,
   },
-  data() {
-    return {
-      count: 0
-    }
-  },
   methods: {
     removeItem(index) {
       this.array.splice(index, 1);
@@ -33,6 +28,7 @@ export default {
     },
     colorChange(object) {
       object.completed = !object.completed;
+      this.updateList();
     },
   }
 }
