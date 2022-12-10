@@ -1,6 +1,6 @@
 <template>
   <div class="todo_list">
-      <ol>
+    <ol>
         <transition-group name="fade">
           <li @click="colorChange(itemCount)" 
               :key="Math.random"
@@ -9,7 +9,7 @@
               <button class="deleteButton" @click.stop='removeItem(index)'>X</button>
           </li>
         </transition-group>
-      </ol>
+    </ol>
   </div>
   <form action="" class="input_div" @click.prevent>
     <label for="item_input">New list item
@@ -40,8 +40,12 @@
   </div>
 </template>
 <script>
+// import ButtonCounter from './components/ButtonCounter.vue'
 
 export default {
+  components: {
+    // ButtonCounter
+  },
   data() {
     return { todoList: [],
     newListItem: '',        /*Variable for putting value to list's array*/
@@ -119,7 +123,7 @@ export default {
     if (localStorage.getItem('todoList')) {
       const listContent = JSON.parse(localStorage.getItem('todoList'));
       this.todoList = listContent;
-    } 
+    }
   }
 }
 
