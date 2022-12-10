@@ -73,4 +73,10 @@ li {
 ol {
   padding: 5%;
 }
+
+button {
+  font-size: 0.7em;
+  font-weight: bold;
+  flex-grow: 1;
+}
 </style>

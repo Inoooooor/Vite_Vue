@@ -27,8 +27,6 @@
 export default {
   props: {
     array: Array,
-    // newListItem: String,
-    // completed: Boolean,
   },
   data() {
     return {
@@ -44,22 +42,17 @@ export default {
         this.inputClear();
       }
     },
-    updateList() {
-      localStorage.setItem('todoList', JSON.stringify(this.array));
+    clearAll() {
+      this.$emit('clear-all');
     },
-    // colorChange(object) {
-    //   object.completed = !object.completed;
-    // },
+    clearCompleted(){
+      this.$emit('clear-completed');
+    },
     inputClear() {
       this.newListItem = '';
     },
-    clearAll() {
-      this.array = [];
-      this.updateList();
-    },
-    clearCompleted(){
-      this.array = this.array.filter(item => !item.completed);
-      this.updateList();
+    updateList() {
+      localStorage.setItem('todoList', JSON.stringify(this.array));
     },
   }
 }
@@ -81,5 +74,14 @@ select {
   flex-grow: 1;
 }
 
+input {
+  font-size: 1em;
+  flex-grow: 1;
+  width: 100%;
+}
 
+label {
+  color: white;
+  display: block;
+}
 </style>
