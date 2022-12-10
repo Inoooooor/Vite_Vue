@@ -12,7 +12,7 @@
     </ol>
   </div> -->
   <List :array="todoList"></List>
-  <form action="" class="input_div" @click.prevent>
+  <!-- <form action="" class="input_div" @click.prevent>
     <label for="item_input">New list item
       <input v-model="newListItem" 
         required 
@@ -33,7 +33,8 @@
     <button @click="addItem">Add</button>
     <button @click="clearAll">Clear all</button>
     <button @click="clearCompleted">Clear completed</button>  
-  </form>
+  </form> -->
+  <InputForm :array="todoList"></InputForm>
   <div class="list_templates">
     <button @click="plovRecipe" class="plov_template">Plov recipe</button>
     <button @click="antonQuote" class="anton">Anton's quote</button>
@@ -42,10 +43,11 @@
 </template>
 <script>
 import List from './components/List.vue'
-
+import InputForm from './components/InputForm.vue'
 export default {
   components: {
     List,
+    InputForm,
   },
   data() {
     return { todoList: [],
@@ -54,34 +56,34 @@ export default {
     }
   },
   methods: {
-    addItem() {
-      if(this.newListItem) {
-        this.todoList.push({item: this.newListItem, completed: this.completed});
-        this.updateList();
-        this.inputClear();
-      }
-    },
-    colorChange(object) {
-      object.completed = !object.completed;
-    },
-    inputClear() {
-      this.newListItem = '';
-    },
-    removeItem(index) {
-      this.todoList.splice(index, 1);
-      this.updateList();
-    },
-    updateList() {
-      localStorage.setItem('todoList', JSON.stringify(this.todoList));
-    },
-    clearAll() {
-      this.todoList = [];
-      this.updateList();
-    },
-    clearCompleted(){
-      this.todoList = this.todoList.filter(item => !item.completed);
-      this.updateList();
-    },
+    // addItem() {
+    //   if(this.newListItem) {
+    //     this.todoList.push({item: this.newListItem, completed: this.completed});
+    //     this.updateList();
+    //     this.inputClear();
+    //   }
+    // },
+    // colorChange(object) {
+    //   object.completed = !object.completed;
+    // },
+    // inputClear() {
+    //   this.newListItem = '';
+    // },
+    // removeItem(index) {
+    //   this.todoList.splice(index, 1);
+    //   this.updateList();
+    // },
+    // updateList() {
+    //   localStorage.setItem('todoList', JSON.stringify(this.todoList));
+    // },
+    // clearAll() {
+    //   this.todoList = [];
+    //   this.updateList();
+    // },
+    // clearCompleted(){
+    //   this.todoList = this.todoList.filter(item => !item.completed);
+    //   this.updateList();
+    // },
     antonQuote() {
       this.todoList = [
         {item: 'Ты', completed: false},
@@ -217,12 +219,12 @@ select {
   width: calc(100% / 3);
 }
 
-.fade-enter-active, .fade-leave-active {
+/* .fade-enter-active, .fade-leave-active {
   transition: opacity .5s ease, background-color .5s;
 }
 
 .fade-enter-from, .fade-leave-active{
   opacity: 0;
-}
+} */
 
 </style>
