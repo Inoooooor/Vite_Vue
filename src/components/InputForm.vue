@@ -26,18 +26,18 @@
 <script>
 export default {
   props: {
-    array: Array,
+    array: Array,               /* variable to get from parent */
   },
   data() {
     return {
-      newListItem: '',        /*Variable for putting value to list's array*/
-      completed: false,
+      newListItem: '',        /*Variables for putting value to every list's object*/
+      completed: false,       
     }
   },
   methods: {
     addItem() {
       if(this.newListItem) {
-        this.array.push({item: this.newListItem, completed: this.completed});
+        this.array.push({item: this.newListItem, completed: this.completed}); 
         this.updateList();
         this.inputClear();
       }

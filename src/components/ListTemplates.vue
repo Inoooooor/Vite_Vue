@@ -16,7 +16,7 @@ export default {
       this.$emit('plov-recipe');
     },
     dailyList() {
-      this.$emit('daily-list');
+      this.$emit('daily-list');                   /*Emits for filling parents array*/
     },
   }
 }

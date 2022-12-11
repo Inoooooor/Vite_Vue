@@ -16,7 +16,7 @@
 <script>
 export default {
   props: {
-    array: Array,
+    array: Array,               /* variable to get from parent */
   },
   methods: {
     removeItem(index) {

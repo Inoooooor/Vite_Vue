@@ -5,8 +5,8 @@
   <InputForm
   :array="todoList"
    @clear-all="clearAll"
-   @clear-completed="clearCompleted"
-   ></InputForm>
+   @clear-completed="clearCompleted">
+  </InputForm>
   <ListTemplates
     @anton-quote="antonQuote"
     @plov-recipe="plovRecipe"
@@ -31,14 +31,14 @@ export default {
   },
   methods: {
     updateList() {
-      localStorage.setItem('todoList', JSON.stringify(this.todoList));
+      localStorage.setItem('todoList', JSON.stringify(this.todoList));      /* putting fresh array to localStorage as json string */
     },
     clearAll() {
       this.todoList = [];
       this.updateList();
     },
     clearCompleted(){
-      this.todoList = this.todoList.filter(item => !item.completed);
+      this.todoList = this.todoList.filter(item => !item.completed);    /* filter goes through array and finds completed props with false argument */
       this.updateList();
     },
     antonQuote() {
